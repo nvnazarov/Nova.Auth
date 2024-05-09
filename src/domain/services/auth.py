@@ -3,6 +3,7 @@ from .. import repos
 from .. import errors
 from .. import hasher
 from .. import token
+from .. import validators
 
 
 class AuthService:
@@ -35,6 +36,12 @@ class AuthService:
     
     
     async def register(self, credentials: dtos.RegistrationIn) -> dtos.RegistrationOut:
+        if not validators.validate_email(credentials.email):
+            raise errors.BadEmail
+        
+        if not validators.validate_password(credentials.password):
+            raise errors.BadPassword
+        
         user = await self.user_repo.find_by_email(credentials.email)
         
         if user:

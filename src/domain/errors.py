@@ -14,6 +14,10 @@ class WrongPassword(AuthError):
     pass
 
 
+class BadEmail(AuthError):
+    pass
+
+
 class BadPassword(AuthError):
     pass
 
