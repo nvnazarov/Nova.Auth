@@ -24,6 +24,9 @@ class AuthService:
         if not user:
             raise errors.NoUser
         
+        if not user.email_verified:
+            raise errors.EmailNotVerified
+        
         if not self.hasher.verify(credentials.password, user.password_hash):
             raise errors.WrongPassword
         

@@ -24,3 +24,7 @@ class BadPassword(AuthError):
 
 class BadToken(AuthError):
     pass
+
+
+class EmailNotVerified(AuthError):
+    pass
